@@ -5,6 +5,12 @@ class Frog{
 		this.domElement = null;
 		this.move = this.initialMove;
 	}
+	placeAtPosition(newX, newY){
+		this.domElement.css({
+			left: newX+'px',
+			top: newY+'px'
+		})		
+	}
 	receiveMove(direction){
 		debugger;
 		switch( direction ){
@@ -36,10 +42,7 @@ class Frog{
 		var position = this.domElement.offset();
 		var newX = position.left + ( deltaX * this.size.width );
 		var newY = position.top + ( deltaY * this.size.height );
-		this.domElement.css({
-			left: newX+'px',
-			top: newY+'px'
-		})
+		this.placeAtPosition( newX, newY);
 	}
 	render(){
 		this.domElement = $("<div>").addClass('frog');

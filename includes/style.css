@@ -16,3 +16,34 @@ body{
 	background-color: darkgreen;
 	position: absolute;
 }
+
+.sidewalk{
+	height: 7%;
+	background-color: grey;
+}
+.road{
+	height: 40%;
+	background-color: black;
+}
+.river{
+	height: 40%;
+	background-color: blue;
+}
+.nestingarea{
+	height: 6%;
+	background-color: green;
+}
+
+.car{
+	background-color: lightgrey;
+	border: 1px solid pink;
+	box-sizing: border-box;
+	position: absolute;
+	height: 20px;
+	width: 20px;
+}
+
+
+
+
+
