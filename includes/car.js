@@ -1,8 +1,8 @@
 
 
 class Car extends Mobile{
-	constructor(movementSpeed, parentSizeCallback, removalCallback){
-		super(movementSpeed, parentSizeCallback, removalCallback);
+	constructor(configObject){
+		super(configObject);
 		this.addUpdateFunction( this.move.bind(this, 1,0 ) );
 		this.addUpdateFunction( this.checkForRemoval.bind( this ));
 	}

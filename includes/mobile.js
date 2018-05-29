@@ -1,9 +1,26 @@
 
 
 class Mobile{
-	constructor(moveDistance=0, parentSizeCallback = function(){}, removalCallback = ()=>{}){
+	constructor(configurationObject={}){
+		//moveDistance=0, parentSizeCallback = function(){}, removalCallback = ()=>{}){
+		//{speed: randomSpeed, getParentSize: checkParentSizeCallback, parentRemoveChild: removalCallback}
+		var defaults = {
+			speed: 0,
+			getParentSize: function(){},
+			parentRemoveChild: function(){}
+		}
+		this.config = {};
+		for(var key in defaults){
+			if(configurationObject[key]===undefined){
+				this.config[key] = defaults[key];
+			} else {
+				this.config[key] = configurationObject[key];
+			}
+		}
+		var moveDistance = this.config.speed;
+		var parentSizeCallback = this.config.getParentSize;
 		this.domElement = null;
-		this.parentRemoveChildCallback = removalCallback;
+		this.parentRemoveChildCallback = this.config.parentRemoveChild;
 		this.position = {
 			left: null,
 			top: null

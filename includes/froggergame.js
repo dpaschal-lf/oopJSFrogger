@@ -29,7 +29,8 @@ class FroggerGame{
 		var randomSpeed = this.getRandomNumber(10, 30)/100 * this.area.road.width();
 		var checkParentSizeCallback = this.getAreaSize.bind(this, 'road');
 		var removalCallback = this.childRequestsRemoval.bind(this);
-		var newCar = new Car(randomSpeed, checkParentSizeCallback, removalCallback);
+		var carOptions = {speed: randomSpeed, getParentSize: checkParentSizeCallback, parentRemoveChild: removalCallback}
+		var newCar = new Car(carOptions );
 		var carDomElement = newCar.render();
 		this.area.road.append(carDomElement);
 		this.cars.push(newCar);
