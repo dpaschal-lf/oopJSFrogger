@@ -18,7 +18,7 @@ class FroggerGame{
 	handleKeyPressOnParent(event){
 		console.log('passing movement keys to frog')
 		var letter = event.key;
-		this.player.move( letter );
+		this.player.receiveMove( letter );
 	}
 
 	render(){

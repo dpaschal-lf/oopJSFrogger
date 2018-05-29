@@ -3,22 +3,43 @@
 class Frog{
 	constructor(){
 		this.domElement = null;
+		this.move = this.initialMove;
 	}
-	move(direction){
+	receiveMove(direction){
+		debugger;
 		switch( direction ){
 			case 'w': 
-				console.log('going up');
+				this.move(0, -1);
 				break;
 			case 'a':
-				console.log('going left');
+				this.move(-1, 0);
 				break;
 			case 'd':
-				console.log('going right');
+				this.move(1, 0);
 				break;
 			case 's':
-				console.log('going down');
+				this.move(0, 1);
 				break;
 		}
+	}
+	initialMove( deltaX, deltaY ){
+		console.log('initial move called')
+		this.size = {
+			height: this.domElement.height(),
+			width: this.domElement.width()
+		}
+		this.move = this.subsequentMove;
+		this.move(deltaX, deltaY);		
+	}
+	subsequentMove( deltaX, deltaY ){
+		console.log(`moving : ${deltaX}, ${deltaY}`);
+		var position = this.domElement.offset();
+		var newX = position.left + ( deltaX * this.size.width );
+		var newY = position.top + ( deltaY * this.size.height );
+		this.domElement.css({
+			left: newX+'px',
+			top: newY+'px'
+		})
 	}
 	render(){
 		this.domElement = $("<div>").addClass('frog');
