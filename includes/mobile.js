@@ -1,12 +1,22 @@
 
 
 class Mobile{
-	constructor(moveDistance=0){
+	constructor(moveDistance=0, parentSizeCallback = function(){}, removalCallback = ()=>{}){
 		this.domElement = null;
+		this.parentRemoveChildCallback = removalCallback;
 		this.position = {
 			left: null,
 			top: null
 		};
+		this.size = {
+			height: null,
+			width: null
+		}
+		this.getParentSize = parentSizeCallback;
+		this.parentSize = {
+			height: null,
+			width: null
+		}
 		this.moveTarget = this.initialMove;
 		this.moveDistance = moveDistance;
 		this.heartbeatFunctions = [];
@@ -21,12 +31,17 @@ class Mobile{
 		this.moveTarget(xPer, yPer);
 	}
 	initialMove(xPer, yPer){
+		debugger;
+		this.size.height = this.domElement.height();
+		this.size.width = this.domElement.width();
+		var parentSizeObject = this.getParentSize();
+		this.parentSize.width = parentSizeObject.width;
+		this.parentSize.height = parentSizeObject.height;
 		this.position = this.domElement.position();
 		this.moveTarget = this.subsequentMove;
 		this.subsequentMove(xPer, yPer);
 	}
 	subsequentMove(xPer, yPer){
-		debugger;
 		var newX = this.movementPerInterval * xPer + this.position.left;
 		var newY = this.movementPerInterval * yPer + this.position.top;
 		this.placeAtPosition(newX, newY);
@@ -45,7 +60,7 @@ class Mobile{
 		}
 		this.heartbeatTimer = setInterval( this.processHeartbeat, this.heartBeatInterval)
 	}
-	endHeartbeat(){
+	stopHeartbeat(){
 		clearInterval( this.heartbeatTimer );
 		this.heartbeatTimer = null;
 	}
@@ -56,6 +71,9 @@ class Mobile{
 		for(var functionIndex = 0; functionIndex < this.heartbeatFunctions.length; functionIndex++){
 			this.heartbeatFunctions[ functionIndex ]();
 		}
+	}
+	die(){
+		this.domElement.remove();
 	}
 
 }

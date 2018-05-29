@@ -26,8 +26,10 @@ class FroggerGame{
 		this.player.receiveMove( letter );
 	}
 	addCar(){
-		var randomSpeed = this.getRandomNumber(10, 20)/100 * this.area.road.width();
-		var newCar = new Car(randomSpeed);
+		var randomSpeed = this.getRandomNumber(10, 30)/100 * this.area.road.width();
+		var checkParentSizeCallback = this.getAreaSize.bind(this, 'road');
+		var removalCallback = this.childRequestsRemoval.bind(this);
+		var newCar = new Car(randomSpeed, checkParentSizeCallback, removalCallback);
 		var carDomElement = newCar.render();
 		this.area.road.append(carDomElement);
 		this.cars.push(newCar);
@@ -37,7 +39,21 @@ class FroggerGame{
 		newCar.placeAtPosition(0, yPos);
 		newCar.start();
 	}
-
+	getAreaSize( area ){
+		return {
+			width: this.area[area].width(),
+			height: this.area[area].height()
+		}
+	}
+	childRequestsRemoval( child ){
+		if(child.constructor === Car){
+			var carIndex = this.cars.indexOf(child);
+			this.cars.splice(carIndex, 1);
+			debugger;
+			child.stop();
+			child.die();
+		}
+	}
 	getRandomNumber(min=0, max=100){
 		return Math.floor( Math.random() * (max-min+1)) + min;
 	}

@@ -1,9 +1,8 @@
 
 
 class Car extends Mobile{
-	constructor(movementSpeed){
-		super(movementSpeed);
-		debugger;
+	constructor(movementSpeed, parentSizeCallback, removalCallback){
+		super(movementSpeed, parentSizeCallback, removalCallback);
 		this.addUpdateFunction( this.move.bind(this, 1,0 ) );
 		this.addUpdateFunction( this.checkForRemoval.bind( this ));
 	}
@@ -14,7 +13,9 @@ class Car extends Mobile{
 		return this.domElement;
 	}
 	checkForRemoval(){
-		
+		if(this.position.left>this.parentSize.width){
+			this.parentRemoveChildCallback( this );
+		}
 	}
 	start(){
 		this.startHeartbeat();
