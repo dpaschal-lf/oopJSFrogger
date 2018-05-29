@@ -4,4 +4,3 @@ game.addEventHandlers();
 game.render();
 game.instantiateFrog();
 
-game.addCar();

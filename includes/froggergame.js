@@ -10,7 +10,6 @@ class FroggerGame{
 		this.handleKeyPressOnParent = this.handleKeyPressOnParent.bind(this);
 	}
 	instantiateFrog(){
-		debugger;
 		this.player = new Frog();
 		var playerElement = this.player.render();
 		this.mainElement.append( playerElement );
@@ -27,16 +26,16 @@ class FroggerGame{
 		this.player.receiveMove( letter );
 	}
 	addCar(){
-		var newCar = new Car();
+		var randomSpeed = this.getRandomNumber(10, 20)/100 * this.area.road.width();
+		var newCar = new Car(randomSpeed);
 		var carDomElement = newCar.render();
 		this.area.road.append(carDomElement);
 		this.cars.push(newCar);
 		var maxHeight = this.area.road.height();
 		var carHeight = newCar.domElement.height();
 		var yPos = this.getRandomNumber(0, maxHeight - carHeight);
-		console.log(yPos);
-		
 		newCar.placeAtPosition(0, yPos);
+		newCar.start();
 	}
 
 	getRandomNumber(min=0, max=100){
