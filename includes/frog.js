@@ -1,16 +1,11 @@
 
 
-class Frog{
+class Frog extends Mobile{
 	constructor(){
-		this.domElement = null;
+		super();
 		this.move = this.initialMove;
 	}
-	placeAtPosition(newX, newY){
-		this.domElement.css({
-			left: newX+'px',
-			top: newY+'px'
-		})		
-	}
+
 	receiveMove(direction){
 		debugger;
 		switch( direction ){

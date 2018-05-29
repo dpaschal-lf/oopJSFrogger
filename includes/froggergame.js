@@ -29,27 +29,37 @@ class FroggerGame{
 	addCar(){
 		var newCar = new Car();
 		var carDomElement = newCar.render();
-		this.mainElement.append(carDomElement);
+		this.area.road.append(carDomElement);
+		this.cars.push(newCar);
+		var maxHeight = this.area.road.height();
+		var carHeight = newCar.domElement.height();
+		var yPos = this.getRandomNumber(0, maxHeight - carHeight);
+		console.log(yPos);
+		
+		newCar.placeAtPosition(0, yPos);
 	}
 
+	getRandomNumber(min=0, max=100){
+		return Math.floor( Math.random() * (max-min+1)) + min;
+	}
 	render(){
 		this.mainElement = $("<main>",{
-			'class': 'gameContainer'
+			'class': 'gameContainer gameZone'
 		});
 		this.area.startingSidewalk = $("<section>",{
-			'class': 'sidewalk'
+			'class': 'sidewalk gameZone'
 		})
 		this.area.road = $("<section>",{
-			'class': 'road'
+			'class': 'road gameZone'
 		})
 		this.area.middleSidewalk = $("<section>",{
-			'class': 'sidewalk'
+			'class': 'sidewalk gameZone'
 		})
 		this.area.river = $("<section>",{
-			'class': 'river'
+			'class': 'river gameZone'
 		})
 		this.area.nests = $("<section>",{
-			'class': 'nestingarea'
+			'class': 'nestingarea gameZone'
 		})
 		this.mainElement.append(
 			this.area.nests,

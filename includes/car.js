@@ -1,13 +1,6 @@
 
 
-class Car{
-	constructor(){
-		this.domElement = null;
-		this.position = {
-			left: null,
-			top: null
-		};
-	}
+class Car extends Mobile{
 	render(){
 		this.domElement = $("<div>",{
 			'class': 'car'

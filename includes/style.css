@@ -33,6 +33,9 @@ body{
 	height: 6%;
 	background-color: green;
 }
+.gameZone{
+	position: relative;
+}
 
 .car{
 	background-color: lightgrey;
