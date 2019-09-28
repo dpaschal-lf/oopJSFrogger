@@ -7,7 +7,15 @@ class FroggerGame{
 		this.player = null; 
 		this.cars = [];
 		this.area = {};
+		this.soundPlayer = new SoundPlayer();
+		this.muted = true;
 		this.handleKeyPressOnParent = this.handleKeyPressOnParent.bind(this);
+	}
+	mute(){
+		this.muted = true;
+	}
+	unmute(){
+		this.muted = false;
 	}
 	instantiateFrog(){
 		this.player = new Frog();
@@ -16,6 +24,11 @@ class FroggerGame{
 		var frogTop = this.mainElement.height() - this.area.startingSidewalk.height();
 		var frogLeft = this.mainElement.width()/2 - this.player.domElement.width()/2;
 		this.player.placeAtPosition(frogLeft, frogTop);
+		this.soundPlayer.unmute();
+		this.soundPlayer.play('includes/sounds/dp_frogger.mp3');
+	}
+	play(sound){
+		this.soundPlayer.play(sound);
 	}
 	addEventHandlers(){
 		this.parentElement.on('keypress', this.handleKeyPressOnParent );
